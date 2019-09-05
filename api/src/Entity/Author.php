@@ -7,6 +7,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity()
@@ -25,18 +26,21 @@ class Author
     /**
      * @var string
      * @ORM\Column(type="string")
+     * @Assert\NotBlank()
      */
     private $firstname;
 
     /**
      * @var string
      * @ORM\Column(type="text")
+     * @Assert\NotBlank()
      */
     private $lastname;
 
     /**
      * @var \DateTime
      * @ORM\Column(type="date")
+     * @Assert\NotBlank()
      */
     private $birthday;
     /**

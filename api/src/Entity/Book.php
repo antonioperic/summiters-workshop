@@ -7,6 +7,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity()
@@ -24,25 +25,30 @@ class Book
 
     /**
      * @var string
-     * @ORM\Column(type="string", length=13)
+     * @ORM\Column(type="string", length=13, unique=true)
+     * @Assert\Isbn()
+     * @Assert\Length(13)
      */
     private $isbn;
 
     /**
      * @var string
      * @ORM\Column(type="string")
+     * @Assert\NotBlank()
      */
     private $title;
 
     /**
      * @var string
      * @ORM\Column(type="text")
+     * @Assert\NotBlank()
      */
     private $abstract;
 
     /**
      * @var \DateTime
      * @ORM\Column(type="date")
+     * @Assert\NotBlank()
      */
     private $publicationDate;
 
@@ -50,11 +56,12 @@ class Book
      * @var float
      * @ORM\Column(type="float")
      */
-    private $averageReviewRate;
+    private $averageReviewRate = 0;
 
     /**
      * @var Author
      * @ORM\ManyToOne(targetEntity="Author")
+     * @Assert\NotBlank()
      */
     private $author;
 
