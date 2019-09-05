@@ -118,7 +118,7 @@ class Author
     /**
      * @return Book[]
      */
-    public function getBooks(): array
+    public function getBooks()
     {
         return $this->books;
     }
