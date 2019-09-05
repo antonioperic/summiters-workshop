@@ -6,6 +6,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -70,6 +71,20 @@ class Book
      * @Assert\NotBlank()
      */
     private $author;
+
+    /**
+     * @var Review[]
+     * @ORM\OneToMany(targetEntity="Review", mappedBy="book")
+     */
+    private $reviews;
+
+    /**
+     * Book constructor.
+     */
+    public function __construct()
+    {
+        $this->reviews = new ArrayCollection();
+    }
 
     /**
      * @return int
@@ -173,5 +188,21 @@ class Book
     public function setAuthor(Author $author): void
     {
         $this->author = $author;
+    }
+
+    /**
+     * @return Review[]
+     */
+    public function getReviews()
+    {
+        return $this->reviews;
+    }
+
+    /**
+     * @param Review[] $reviews
+     */
+    public function setReviews(array $reviews): void
+    {
+        $this->reviews = $reviews;
     }
 }
