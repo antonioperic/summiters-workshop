@@ -78,11 +78,4 @@ class ApiTest extends BaseTest
 
         $this->assertEmpty($response->getContent());
     }
-
-    protected function findOneIriBy(string $resourceClass, array $criteria): string
-    {
-        $resource = static::$container->get('doctrine')->getRepository($resourceClass)->findOneBy($criteria);
-
-        return static::$container->get('api_platform.iri_converter')->getIriFromitem($resource);
-    }
 }
