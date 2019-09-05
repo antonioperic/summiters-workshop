@@ -3,6 +3,18 @@ resources:
   App\Entity\Book:
     attributes:
       filters: ['book.name', 'book.date']
+      normalization_context:
+        groups: ['book_read']
+    itemOperations:
+      get:
+        method: "GET"
+        normalization_context:
+          groups: ['book_all']
+    properties:
+      author:
+        subresource:
+          resourceClass: 'App\Entity\Author'
+          collection: false
   App\Entity\Review: ~
   App\Entity\Author:
     attributes:
@@ -14,3 +26,4 @@ resources:
         subresource:
           resourceClass: 'App\Entity\Book'
           collection: true
+          maxDepth: 1
