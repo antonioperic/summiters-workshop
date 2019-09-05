@@ -3,6 +3,9 @@ resources:
   App\Entity\Book: ~
   App\Entity\Review: ~
   App\Entity\Author:
+    attributes:
+      order:
+        lastname: ASC
     properties:
       books:
         subresource:
