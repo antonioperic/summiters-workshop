@@ -6,6 +6,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -43,6 +44,21 @@ class Author
      * @Assert\NotBlank()
      */
     private $birthday;
+
+    /**
+     * @var Book[]
+     * @ORM\OneToMany(targetEntity="Book", mappedBy="author")
+     */
+    private $books;
+
+    /**
+     * Author constructor.
+     */
+    public function __construct()
+    {
+        $this->books = new ArrayCollection();
+    }
+
     /**
      * @return int
      */
@@ -98,5 +114,21 @@ class Author
     {
         $this->birthday = $birthday;
     }
-    
+
+    /**
+     * @return Book[]
+     */
+    public function getBooks(): array
+    {
+        return $this->books;
+    }
+
+    /**
+     * @param Book[] $books
+     */
+    public function setBooks(array $books): void
+    {
+        $this->books = $books;
+    }
+
 }

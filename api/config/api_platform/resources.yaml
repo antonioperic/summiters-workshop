@@ -1,5 +1,10 @@
 resources:
-    App\Entity\Greeting: ~
-    App\Entity\Author: ~
-    App\Entity\Book: ~
-    App\Entity\Review: ~
+  App\Entity\Greeting: ~
+  App\Entity\Book: ~
+  App\Entity\Review: ~
+  App\Entity\Author:
+    properties:
+      books:
+        subresource:
+          resourceClass: 'App\Entity\Book'
+          collection: true
