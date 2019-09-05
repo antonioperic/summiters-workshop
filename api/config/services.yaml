@@ -20,7 +20,7 @@ services:
 
     book.date_filter:
         parent: 'api_platform.doctrine.orm.date_filter'
-        arguments: [ {datetime: ~} ]
+        arguments: [ {publicationDate: ~} ]
         tags:
             - {name: 'api_platform.filter', id: 'book.date'}
     book.name_filter:
