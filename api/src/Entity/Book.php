@@ -60,7 +60,7 @@ class Book
 
     /**
      * @var Author
-     * @ORM\ManyToOne(targetEntity="Author")
+     * @ORM\ManyToOne(targetEntity="Author", inversedBy="books")
      * @Assert\NotBlank()
      */
     private $author;
