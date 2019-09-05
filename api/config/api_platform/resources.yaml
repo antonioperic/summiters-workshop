@@ -1,11 +1,14 @@
 resources:
   App\Entity\Greeting: ~
-  App\Entity\Book: ~
+  App\Entity\Book:
+    attributes:
+      filters: ['book.name', 'book.date']
   App\Entity\Review: ~
   App\Entity\Author:
     attributes:
       order:
         lastname: ASC
+      filters: ['author.name']
     properties:
       books:
         subresource:
