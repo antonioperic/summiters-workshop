@@ -8,6 +8,7 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -28,6 +29,7 @@ class Author
      * @var string
      * @ORM\Column(type="string")
      * @Assert\NotBlank()
+     * @Groups({"book_read", "book_all"})
      */
     private $firstname;
 
@@ -35,6 +37,7 @@ class Author
      * @var string
      * @ORM\Column(type="text")
      * @Assert\NotBlank()
+     * @Groups({"book_read", "book_all"})
      */
     private $lastname;
 
@@ -42,6 +45,7 @@ class Author
      * @var \DateTime
      * @ORM\Column(type="date")
      * @Assert\NotBlank()
+     * @Groups({"book_all"})
      */
     private $birthday;
 

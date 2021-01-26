@@ -6,7 +6,9 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -28,6 +30,7 @@ class Book
      * @ORM\Column(type="string", length=13, unique=true)
      * @Assert\Isbn()
      * @Assert\Length(13)
+     * @Groups({"book_read", "book_all"})
      */
     private $isbn;
 
@@ -35,6 +38,7 @@ class Book
      * @var string
      * @ORM\Column(type="string")
      * @Assert\NotBlank()
+     * @Groups({"book_read"})
      */
     private $title;
 
@@ -42,6 +46,7 @@ class Book
      * @var string
      * @ORM\Column(type="text")
      * @Assert\NotBlank()
+     * @Groups({"book_all"})
      */
     private $abstract;
 
@@ -49,12 +54,14 @@ class Book
      * @var \DateTime
      * @ORM\Column(type="date")
      * @Assert\NotBlank()
+     * @Groups({"book_all"})
      */
     private $publicationDate;
 
     /**
      * @var float
      * @ORM\Column(type="float")
+     * @Groups({"book_all"})
      */
     private $averageReviewRate = 0;
 
@@ -64,6 +71,20 @@ class Book
      * @Assert\NotBlank()
      */
     private $author;
+
+    /**
+     * @var Review[]
+     * @ORM\OneToMany(targetEntity="Review", mappedBy="book")
+     */
+    private $reviews;
+
+    /**
+     * Book constructor.
+     */
+    public function __construct()
+    {
+        $this->reviews = new ArrayCollection();
+    }
 
     /**
      * @return int
@@ -167,5 +188,21 @@ class Book
     public function setAuthor(Author $author): void
     {
         $this->author = $author;
+    }
+
+    /**
+     * @return Review[]
+     */
+    public function getReviews()
+    {
+        return $this->reviews;
+    }
+
+    /**
+     * @param Review[] $reviews
+     */
+    public function setReviews(array $reviews): void
+    {
+        $this->reviews = $reviews;
     }
 }

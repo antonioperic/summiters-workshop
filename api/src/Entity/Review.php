@@ -47,7 +47,7 @@ class Review
 
     /**
      * @var Book
-     * @ORM\ManyToOne(targetEntity="Book")
+     * @ORM\ManyToOne(targetEntity="Book", inversedBy="reviews", cascade={"PERSIST"})
      * @Assert\NotBlank()
      */
     private $book;
@@ -55,7 +55,6 @@ class Review
     /**
      * @var \DateTime
      * @ORM\Column(type="datetime")
-     * @Assert\NotBlank()
      */
     private $createdAt;
 
@@ -115,4 +114,35 @@ class Review
         return $this->createdAt;
     }
 
+    /**
+     * @param string $author
+     */
+    public function setAuthor(string $author): void
+    {
+        $this->author = $author;
+    }
+
+    /**
+     * @param string $review
+     */
+    public function setReview(string $review): void
+    {
+        $this->review = $review;
+    }
+
+    /**
+     * @param int $rate
+     */
+    public function setRate(int $rate): void
+    {
+        $this->rate = $rate;
+    }
+
+    /**
+     * @param Book $book
+     */
+    public function setBook(Book $book): void
+    {
+        $this->book = $book;
+    }
 }
